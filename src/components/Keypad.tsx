@@ -23,7 +23,7 @@ const Key = ({ label, color, span }: KeyProps) => {
   return (
     <button
       className={cn(
-        'rounded-md text-2xl leading-[0] border-b-4',
+        'rounded-md text-2xl leading-[0] border-b-4 active:translate-y-[2px] active:border-b-0',
         getKeyColor(color),
         span ? 'col-span-2' : ''
       )}
