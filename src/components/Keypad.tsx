@@ -1,6 +1,5 @@
 import cn from 'classnames'
 import { GlobalState, useStateMachine } from 'little-state-machine'
-import { useState } from 'react'
 import { keys } from '../data'
 
 export type KeyColor = 'standard' | 'mark' | 'red'
@@ -96,7 +95,8 @@ const Key = ({ label, color, span, action }: KeyProps) => {
 
     if (action == 'number') {
       if (calculator.result) {
-        actions.setFirstValue(keyContent!)
+        actions.setFirstValue(calculator.secondValue)
+        actions.setSecondValue(keyContent!)
         actions.setResult('')
         return
       }
@@ -116,6 +116,12 @@ const Key = ({ label, color, span, action }: KeyProps) => {
     }
 
     if (action == 'decimal') {
+      if (calculator.result) {
+        actions.setFirstValue(calculator.secondValue)
+        actions.setSecondValue('0.')
+        actions.setResult('')
+        return
+      }
       if (!calculator.secondValue) {
         if (calculator.operator) {
           actions.setSecondValue('0.')
