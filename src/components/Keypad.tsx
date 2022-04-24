@@ -63,9 +63,15 @@ const setSecondValue = (state: GlobalState, payload: string): GlobalState => {
 }
 
 const calculate = (num1: string, operator: string, num2: string) => {
-  const leftNum = parseFloat(num1)
-  const rightNum = parseFloat(num2)
+  let leftNum = parseFloat(num1)
+  let rightNum = parseFloat(num2)
 
+  if (!operator) {
+    return leftNum.toString()
+  }
+  if (!rightNum) {
+    rightNum = leftNum
+  }
   if (operator === 'add') {
     return (leftNum + rightNum).toString()
   }
@@ -136,10 +142,9 @@ const Key = ({ label, color, span, action }: KeyProps) => {
     }
 
     if (action == 'add' || action == 'subtract' || action == 'multiply' || action == 'divide') {
+      actions.setResult('')
       if (calculator.operator) {
-        if (calculator.result) {
-          actions.setResult('')
-        } else if (calculator.secondValue) {
+        if (calculator.secondValue && !calculator.result) {
           const result = calculate(
             calculator.firstValue,
             calculator.operator,
