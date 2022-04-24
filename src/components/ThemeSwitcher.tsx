@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { GlobalState, useStateMachine } from 'little-state-machine'
+
+const changeTheme = (state: GlobalState, payload: { type: number; pointerPos: number }) => {
+  return { ...state, theme: payload }
+}
 
 const ThemeSwitcher = () => {
   const btnClass = 'w-5 h-5'
   const labelClass = `flex items-center justify-center text-xs`
 
-  const [theme, setTheme] = useState(1)
-  const [pointerPos, setPointerPos] = useState(0)
+  const { state, actions } = useStateMachine({ changeTheme })
+  const { theme } = state
 
-  const selectTheme = (theme: number) => (e: React.MouseEvent) => {
+  const selectTheme = (type: number) => (e: React.MouseEvent) => {
     const { offsetLeft } = e.target as HTMLButtonElement
-    setTheme(theme)
-    setPointerPos(offsetLeft)
+    actions.changeTheme({ type, pointerPos: offsetLeft })
   }
 
   return (
@@ -26,7 +30,7 @@ const ThemeSwitcher = () => {
           <div
             className={`${btnClass} absolute rounded-full bg-theme1-keys-red top-1/2 left-0 -translate-y-1/2 cursor-pointer transition-transform`}
             style={{
-              transform: `translate(${pointerPos}px,-50%) scale(0.6)`,
+              transform: `translate(${theme.pointerPos}px,-50%) scale(0.6)`,
             }}
           ></div>
           <button className={btnClass} onClick={selectTheme(1)}></button>
