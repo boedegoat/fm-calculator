@@ -66,19 +66,19 @@ const setSecondValue = (state: GlobalState, payload: string): GlobalState => {
 const calculate = (num1: string, operator: string, num2: string) => {
   const leftNum = parseFloat(num1)
   const rightNum = parseFloat(num2)
-  let result = 0
 
   if (operator === 'add') {
-    result = leftNum + rightNum
-  } else if (operator === 'subtract') {
-    result = leftNum - rightNum
-  } else if (operator === 'multiply') {
-    result = leftNum * rightNum
-  } else if (operator === 'divide') {
-    result = leftNum / rightNum
+    return (leftNum + rightNum).toString()
   }
-
-  return result.toString()
+  if (operator === 'subtract') {
+    return (leftNum - rightNum).toString()
+  }
+  if (operator === 'multiply') {
+    return (leftNum * rightNum).toString()
+  }
+  if (operator === 'divide') {
+    return (leftNum / rightNum).toString()
+  }
 }
 
 const Key = ({ label, color, span, action }: KeyProps) => {
@@ -96,9 +96,7 @@ const Key = ({ label, color, span, action }: KeyProps) => {
 
     if (action == 'number') {
       if (calculator.operator) {
-        if (calculator.secondValue == '0.') {
-          actions.setSecondValue(calculator.secondValue + keyContent)
-        } else actions.setSecondValue(calculator.secondValue + keyContent)
+        actions.setSecondValue(calculator.secondValue + keyContent)
         return
       }
       if (calculator.firstValue == '0') {
@@ -108,14 +106,19 @@ const Key = ({ label, color, span, action }: KeyProps) => {
       actions.setFirstValue(calculator.firstValue + keyContent)
     }
 
-    // if (action == 'decimal') {
-    //   if (calculator.screen.includes('.')) return
-    //   if (calculator.operator) {
-    //     actions.setSecondValue('0.')
-    //     return
-    //   }
-    //   actions.setSecondValue(calculator.screen + '.')
-    // }
+    if (action == 'decimal') {
+      if (!calculator.secondValue) {
+        if (calculator.operator) {
+          actions.setSecondValue('0.')
+          return
+        }
+        if (calculator.firstValue.includes('.')) return
+        actions.setFirstValue(calculator.firstValue + '.')
+      } else {
+        if (calculator.secondValue.includes('.')) return
+        actions.setSecondValue(calculator.secondValue + '.')
+      }
+    }
 
     if (action == 'add' || action == 'subtract' || action == 'multiply' || action == 'divide') {
       if (calculator.operator) {
