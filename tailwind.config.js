@@ -1,24 +1,11 @@
 module.exports = {
   content: ['./src/**/*.{ts,tsx,js,jsx}', './index.html'],
   theme: {
-    backgroundColor: {
+    colors: {
       theme1: {
         main: 'hsl(222, 26%, 31%)',
         keypad: 'hsl(223, 31%, 20%)',
         screen: 'hsl(224, 36%, 15%)',
-      },
-      theme2: {
-        main: 'hsl(0, 0%, 90%)',
-        keypad: 'hsl(0, 5%, 81%)',
-        screen: 'hsl(0, 0%, 93%)',
-      },
-      theme3: {
-        main: 'hsl(268, 75%, 9%)',
-        screen: 'hsl(268, 71%, 12%)',
-      },
-    },
-    colors: {
-      theme1: {
         keys: {
           blue: 'hsl(225, 21%, 49%)',
           'blue-shadow': 'hsl(224, 28%, 35%)',
@@ -30,6 +17,9 @@ module.exports = {
         text: 'hsl(221, 14%, 31%)',
       },
       theme2: {
+        main: 'hsl(0, 0%, 90%)',
+        keypad: 'hsl(0, 5%, 81%)',
+        screen: 'hsl(0, 0%, 93%)',
         keys: {
           cyan: 'hsl(185, 42%, 37%)',
           'cyan-shadow': 'hsl(185, 58%, 25%)',
@@ -41,6 +31,8 @@ module.exports = {
         text: 'hsl(60, 10%, 19%)',
       },
       theme3: {
+        main: 'hsl(268, 75%, 9%)',
+        screen: 'hsl(268, 71%, 12%)',
         keys: {
           violet: 'hsl(281, 89%, 26%)',
           'violet-shadow': 'hsl(285, 91%, 52%)',
@@ -54,7 +46,7 @@ module.exports = {
           dark: 'hsl(198, 20%, 13%)',
         },
       },
-      white: 'hsl(0, 0, 100%)',
+      white: '#fff',
     },
     extend: {},
   },
