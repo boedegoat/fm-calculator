@@ -95,7 +95,16 @@ const Key = ({ label, color, span, action }: KeyProps) => {
     const { action } = dataset
 
     if (action == 'number') {
+      if (calculator.result) {
+        actions.setFirstValue(keyContent!)
+        actions.setResult('')
+        return
+      }
       if (calculator.operator) {
+        if (calculator.secondValue == '0') {
+          actions.setSecondValue(keyContent!)
+          return
+        }
         actions.setSecondValue(calculator.secondValue + keyContent)
         return
       }
@@ -114,10 +123,10 @@ const Key = ({ label, color, span, action }: KeyProps) => {
         }
         if (calculator.firstValue.includes('.')) return
         actions.setFirstValue(calculator.firstValue + '.')
-      } else {
-        if (calculator.secondValue.includes('.')) return
-        actions.setSecondValue(calculator.secondValue + '.')
+        return
       }
+      if (calculator.secondValue.includes('.')) return
+      actions.setSecondValue(calculator.secondValue + '.')
     }
 
     if (action == 'add' || action == 'subtract' || action == 'multiply' || action == 'divide') {
@@ -150,11 +159,11 @@ const Key = ({ label, color, span, action }: KeyProps) => {
         actions.setFirstValue(
           calculator.firstValue.slice(0, calculator.firstValue.length - 1) || '0'
         )
-      } else {
-        actions.setSecondValue(
-          calculator.secondValue.slice(0, calculator.secondValue.length - 1) || '0'
-        )
+        return
       }
+      actions.setSecondValue(
+        calculator.secondValue.slice(0, calculator.secondValue.length - 1) || '0'
+      )
     }
 
     if (action == 'reset') {
