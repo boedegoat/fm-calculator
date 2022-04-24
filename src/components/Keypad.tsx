@@ -191,7 +191,7 @@ const Key = ({ label, color, span, action }: KeyProps) => {
         'rounded-md text-2xl leading-[0] border-b-4 active:translate-y-[2px] active:border-b-0',
         getKeyColor(color),
         span ? 'col-span-2' : 'col-span-1',
-        calculator.operator == action ? 'opacity-50' : 'opacity-100'
+        calculator.operator == action && !calculator.secondValue ? 'opacity-50' : 'opacity-100'
       )}
       data-action={action ?? 'number'}
       onClick={onKeyClick}
