@@ -44,6 +44,7 @@ A challenge from [frontendmentor.io](https://www.frontendmentor.io/)
 
 1. [Figma](https://www.figma.com/) - Paste your project design mockups to check the size, colors, etc.
 2. [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+3. [Stackoverflow](https://stackoverflow.com/questions/65040466/underline-element-and-increase-distance-between-them-on-navbar-with-sliding-unde)
 
 ## Acknowledgments
 
