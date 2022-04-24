@@ -66,10 +66,10 @@ const calculate = (num1: string, operator: string, num2: string) => {
   let leftNum = parseFloat(num1)
   let rightNum = parseFloat(num2)
 
-  if (!operator) {
+  if (operator == '') {
     return leftNum.toString()
   }
-  if (!rightNum) {
+  if (num2 == '') {
     rightNum = leftNum
   }
   if (operator === 'add') {
