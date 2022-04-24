@@ -142,9 +142,17 @@ const Key = ({ label, color, span, action }: KeyProps) => {
       actions.setFirstValue(result)
     }
 
-    // if (action == 'delete') {
-    //   actions.setSecondValue(calculator.screen.slice(0, calculator.screen.length - 1))
-    // }
+    if (action == 'delete') {
+      if (!calculator.secondValue) {
+        actions.setFirstValue(
+          calculator.firstValue.slice(0, calculator.firstValue.length - 1) || '0'
+        )
+      } else {
+        actions.setSecondValue(
+          calculator.secondValue.slice(0, calculator.secondValue.length - 1) || '0'
+        )
+      }
+    }
 
     if (action == 'reset') {
       actions.setFirstValue('0')
