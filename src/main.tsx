@@ -10,8 +10,15 @@ createStore(
       type: 1,
       pointerPos: 0,
     },
+    calculator: {
+      firstValue: '0',
+      operator: '',
+      secondValue: '',
+      result: '',
+    },
   },
   {
+    persist: 'none', // change this later
     storageType: localStorage,
   }
 )

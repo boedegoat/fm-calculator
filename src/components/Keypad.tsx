@@ -1,9 +1,13 @@
 import cn from 'classnames'
+import { GlobalState, useStateMachine } from 'little-state-machine'
+import { useState } from 'react'
 import { keys } from '../data'
 
+export type KeyColor = 'standard' | 'mark' | 'red'
 export interface KeyProps {
   label: number | string
-  color: 'standard' | 'mark' | 'red'
+  color: KeyColor
+  action?: string
   span?: boolean
 }
 
@@ -19,24 +23,157 @@ const Keypad = () => {
 
 export default Keypad
 
-const Key = ({ label, color, span }: KeyProps) => {
+const setResult = (state: GlobalState, payload: string): GlobalState => {
+  return {
+    ...state,
+    calculator: {
+      ...state.calculator,
+      result: payload,
+    },
+  }
+}
+
+const setOperator = (state: GlobalState, payload: string): GlobalState => {
+  return {
+    ...state,
+    calculator: {
+      ...state.calculator,
+      operator: payload,
+    },
+  }
+}
+
+const setFirstValue = (state: GlobalState, payload: string): GlobalState => {
+  return {
+    ...state,
+    calculator: {
+      ...state.calculator,
+      firstValue: payload,
+    },
+  }
+}
+
+const setSecondValue = (state: GlobalState, payload: string): GlobalState => {
+  return {
+    ...state,
+    calculator: {
+      ...state.calculator,
+      secondValue: payload,
+    },
+  }
+}
+
+const calculate = (num1: string, operator: string, num2: string) => {
+  const leftNum = parseFloat(num1)
+  const rightNum = parseFloat(num2)
+  let result = 0
+
+  if (operator === 'add') {
+    result = leftNum + rightNum
+  } else if (operator === 'subtract') {
+    result = leftNum - rightNum
+  } else if (operator === 'multiply') {
+    result = leftNum * rightNum
+  } else if (operator === 'divide') {
+    result = leftNum / rightNum
+  }
+
+  return result.toString()
+}
+
+const Key = ({ label, color, span, action }: KeyProps) => {
+  const { state, actions } = useStateMachine({
+    setResult,
+    setOperator,
+    setFirstValue,
+    setSecondValue,
+  })
+  const { calculator } = state
+
+  const onKeyClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    const { dataset, textContent: keyContent } = e.target as HTMLButtonElement
+    const { action } = dataset
+
+    if (action == 'number') {
+      if (calculator.operator) {
+        if (calculator.secondValue == '0.') {
+          actions.setSecondValue(calculator.secondValue + keyContent)
+        } else actions.setSecondValue(calculator.secondValue + keyContent)
+        return
+      }
+      if (calculator.firstValue == '0') {
+        actions.setFirstValue(keyContent!)
+        return
+      }
+      actions.setFirstValue(calculator.firstValue + keyContent)
+    }
+
+    // if (action == 'decimal') {
+    //   if (calculator.screen.includes('.')) return
+    //   if (calculator.operator) {
+    //     actions.setSecondValue('0.')
+    //     return
+    //   }
+    //   actions.setSecondValue(calculator.screen + '.')
+    // }
+
+    if (action == 'add' || action == 'subtract' || action == 'multiply' || action == 'divide') {
+      if (calculator.operator) {
+        if (calculator.result) {
+          actions.setResult('')
+        } else if (calculator.secondValue) {
+          const result = calculate(
+            calculator.firstValue,
+            calculator.operator,
+            calculator.secondValue
+          )
+          actions.setFirstValue(result)
+        }
+        actions.setSecondValue('')
+        actions.setOperator(action)
+        return
+      }
+      actions.setOperator(action)
+    }
+
+    if (action == 'calculate') {
+      const result = calculate(calculator.firstValue, calculator.operator, calculator.secondValue)
+      actions.setResult(result)
+      actions.setFirstValue(result)
+    }
+
+    // if (action == 'delete') {
+    //   actions.setSecondValue(calculator.screen.slice(0, calculator.screen.length - 1))
+    // }
+
+    if (action == 'reset') {
+      actions.setFirstValue('0')
+      actions.setOperator('')
+      actions.setSecondValue('')
+      actions.setResult('')
+    }
+  }
+
   return (
     <button
       className={cn(
         'rounded-md text-2xl leading-[0] border-b-4 active:translate-y-[2px] active:border-b-0',
         getKeyColor(color),
-        span ? 'col-span-2' : ''
+        span ? 'col-span-2' : 'col-span-1',
+        calculator.operator == action ? 'opacity-50' : 'opacity-100'
       )}
+      data-action={action ?? 'number'}
+      onClick={onKeyClick}
     >
       {label}
     </button>
   )
 }
 
-const getKeyColor = (type: string) => {
+const getKeyColor = (color: KeyColor) => {
   let keyColor
 
-  switch (type) {
+  switch (color) {
     case 'standard':
       keyColor = 'bg-theme1-keys-light border-b-theme1-keys-light-shadow text-theme1-text'
       break
