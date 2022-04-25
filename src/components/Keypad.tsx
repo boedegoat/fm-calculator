@@ -172,6 +172,7 @@ const Key = ({ label, color, span, action }: KeyProps) => {
     }
 
     if (action == 'calculate') {
+      if (!calculator.operator) return
       const result = calculate(calculator.firstValue, calculator.operator, calculator.secondValue)
       actions.setResult(result)
       actions.setFirstValue(result)
