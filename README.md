@@ -1,8 +1,8 @@
-# Project Name
+# Calculator App
 
 <!-- screenshots here -->
 
-!()[./screenshot.png]
+![](./screenshot.png)
 
 A challenge from [frontendmentor.io](https://www.frontendmentor.io/)
 
@@ -25,27 +25,23 @@ A challenge from [frontendmentor.io](https://www.frontendmentor.io/)
 ### Built with
 
 - Semantic HTML5 markup
-- CSS custom properties
 - Flexbox
 - CSS Grid
+- Typescript
 - Mobile-first workflow
 - Tailwind CSS
 - React
-- Next JS
 
 ### What I learned
 
-- What do you think about this project ?
-- What have you learned from this project ?
-- Is there any issue while doing this project ?
-- How you solve those issue ?
+This is my first time building calculator with that all kind of calculation operator. At first I have some difficulities at making it, especially for calculation part, but as usual google always help me :). I learnt a lot about the concept of how calculator really works, and how to make it by using javascript.
 
 ### Useful Resources
 
 1. [Figma](https://www.figma.com/) - Paste your project design mockups to check the size, colors, etc.
 2. [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
-3. [Stackoverflow](https://stackoverflow.com/questions/65040466/underline-element-and-increase-distance-between-them-on-navbar-with-sliding-unde)
-4. [Freecodecamp](https://www.freecodecamp.org/news/how-to-build-an-html-calculator-app-from-scratch-using-javascript-4454b8714b98/)
+3. [Stackoverflow](https://stackoverflow.com/questions/65040466/underline-element-and-increase-distance-between-them-on-navbar-with-sliding-unde) - Helps me to create theme switcher animation
+4. [Freecodecamp](https://www.freecodecamp.org/news/how-to-build-an-html-calculator-app-from-scratch-using-javascript-4454b8714b98/) - This article from freecodecamp helps me to build the calculator
 
 ## Acknowledgments
 

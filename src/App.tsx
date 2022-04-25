@@ -26,7 +26,14 @@ const App = () => {
           <Keypad />
         </div>
         <footer className='text-center mt-auto pt-5'>
-          Made with <span className='text-theme1-keys-red'>❤</span> by boedegoat
+          Made with <span className='text-theme1-keys-red'>❤</span> by{' '}
+          <a
+            href='https://www.frontendmentor.io/profile/boedegoat'
+            target='_blank'
+            rel='noopener noreferer'
+          >
+            boedegoat
+          </a>
         </footer>
       </div>
     </main>
