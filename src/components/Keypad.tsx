@@ -11,8 +11,20 @@ export interface KeyProps {
 }
 
 const Keypad = () => {
+  const { state } = useStateMachine()
+  const { theme } = state
+
   return (
-    <div className='mt-5 flex-grow bg-theme1-keypad rounded-xl p-5 grid grid-cols-4 grid-rows-5 gap-4'>
+    <div
+      className={cn(
+        'mt-5 flex-grow rounded-xl p-5 grid grid-cols-4 grid-rows-5 gap-4',
+        theme.type == 1
+          ? 'bg-theme1-keypad'
+          : theme.type == 2
+          ? 'bg-theme2-keypad'
+          : 'bg-theme3-screen'
+      )}
+    >
       {keys.map((key, idx) => (
         <Key key={idx} {...key} />
       ))}
@@ -93,7 +105,7 @@ const Key = ({ label, color, span, action }: KeyProps) => {
     setFirstValue,
     setSecondValue,
   })
-  const { calculator } = state
+  const { calculator, theme } = state
 
   const onKeyClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     const { dataset, textContent: keyContent } = e.target as HTMLButtonElement
@@ -189,7 +201,7 @@ const Key = ({ label, color, span, action }: KeyProps) => {
     <button
       className={cn(
         'rounded-md text-2xl leading-[0] border-b-4 active:translate-y-[2px] active:border-b-0',
-        getKeyColor(color),
+        getKeyColor(color, theme),
         span ? 'col-span-2' : 'col-span-1',
         calculator.operator == action && !calculator.secondValue ? 'opacity-50' : 'opacity-100'
       )}
@@ -201,18 +213,34 @@ const Key = ({ label, color, span, action }: KeyProps) => {
   )
 }
 
-const getKeyColor = (color: KeyColor) => {
+const getKeyColor = (color: KeyColor, theme: { type: number }) => {
   let keyColor
 
   switch (color) {
     case 'standard':
-      keyColor = 'bg-theme1-keys-light border-b-theme1-keys-light-shadow text-theme1-text'
+      keyColor =
+        theme.type == 1
+          ? 'bg-theme1-keys-light border-b-theme1-keys-light-shadow text-theme1-text'
+          : theme.type == 2
+          ? 'bg-theme2-keys-light border-b-theme2-keys-light-shadow text-theme2-text'
+          : 'bg-theme3-keys-dark border-b-theme3-keys-dark-shadow text-theme3-text-yellow'
       break
     case 'mark':
-      keyColor = 'bg-theme1-keys-blue border-b-theme1-keys-blue-shadow text-white'
+      keyColor =
+        theme.type == 1
+          ? 'bg-theme1-keys-blue border-b-theme1-keys-blue-shadow text-white'
+          : theme.type == 2
+          ? 'bg-theme2-keys-cyan border-b-theme2-keys-cyan-shadow text-white'
+          : 'bg-theme3-keys-violet border-b-theme3-keys-violet-shadow text-white'
       break
     case 'red':
       keyColor = 'bg-theme1-keys-red border-b-theme1-keys-red-shadow text-white'
+      keyColor =
+        theme.type == 1
+          ? 'bg-theme1-keys-red border-b-theme1-keys-red-shadow text-white'
+          : theme.type == 2
+          ? 'bg-theme2-keys-orange border-b-theme2-keys-orange-shadow text-white'
+          : 'bg-theme3-keys-cyan border-b-theme3-keys-cyan-shadow text-theme3-text-dark'
       break
   }
 
