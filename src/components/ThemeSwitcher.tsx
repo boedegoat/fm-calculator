@@ -61,7 +61,7 @@ const ThemeSwitcher = () => {
           <div
             className={cn(
               btnClass,
-              'absolute rounded-full bg-theme1-keys-red top-1/2 left-0 -translate-y-1/2 cursor-pointer transition-transform',
+              'absolute rounded-full top-1/2 left-0 -translate-y-1/2 cursor-pointer transition-transform',
               theme.type == 1
                 ? 'bg-theme1-keys-red'
                 : theme.type == 2
