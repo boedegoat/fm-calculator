@@ -72,9 +72,24 @@ const ThemeSwitcher = () => {
               transform: `translate(${theme.pointerPos}px,-50%) scale(0.6)`,
             }}
           ></div>
-          <button className={btnClass} data-theme={1} onClick={selectTheme}></button>
-          <button className={btnClass} data-theme={2} onClick={selectTheme}></button>
-          <button className={btnClass} data-theme={3} onClick={selectTheme}></button>
+          <button
+            aria-label='theme 1'
+            className={btnClass}
+            data-theme={1}
+            onClick={selectTheme}
+          ></button>
+          <button
+            aria-label='theme 2'
+            className={btnClass}
+            data-theme={2}
+            onClick={selectTheme}
+          ></button>
+          <button
+            aria-label='theme 3'
+            className={btnClass}
+            data-theme={3}
+            onClick={selectTheme}
+          ></button>
         </div>
       </div>
     </div>
