@@ -30,7 +30,7 @@ const App = () => {
           <a
             href='https://www.frontendmentor.io/profile/boedegoat'
             target='_blank'
-            rel='noopener noreferer'
+            rel='noopener noreferrer'
           >
             boedegoat
           </a>
