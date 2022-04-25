@@ -21,10 +21,13 @@ const App = () => {
     >
       <div className='p-5 py-8 flex flex-col h-full max-w-md mx-auto'>
         <Top />
-        <div className='mt-10 h-full flex flex-col'>
+        <div className='mt-10 h-full max-h-[600px] flex flex-col'>
           <Screen />
           <Keypad />
         </div>
+        <footer className='text-center mt-auto pt-5'>
+          Made with <span className='text-theme1-keys-red'>❤</span> by boedegoat
+        </footer>
       </div>
     </main>
   )

@@ -17,7 +17,7 @@ const Keypad = () => {
   return (
     <div
       className={cn(
-        'mt-5 flex-grow rounded-xl p-5 grid grid-cols-4 grid-rows-5 gap-4',
+        'mt-5 h-full rounded-xl p-5 grid grid-cols-4 grid-rows-5 gap-4',
         theme.type == 1
           ? 'bg-theme1-keypad'
           : theme.type == 2
