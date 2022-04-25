@@ -18,7 +18,6 @@ createStore(
     },
   },
   {
-    persist: 'none', // change this later
     storageType: localStorage,
   }
 )

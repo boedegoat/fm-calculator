@@ -1,5 +1,6 @@
 import React from 'react'
 import { GlobalState, useStateMachine } from 'little-state-machine'
+import cn from 'classnames'
 
 const changeTheme = (state: GlobalState, payload: { type: number; pointerPos: number }) => {
   return { ...state, theme: payload }
@@ -26,9 +27,26 @@ const ThemeSwitcher = () => {
           <span className={labelClass}>2</span>
           <span className={labelClass}>3</span>
         </div>
-        <div className='relative bg-theme1-keypad overflow-hidden rounded-full flex items-center'>
+        <div
+          className={cn(
+            'relative overflow-hidden rounded-full flex items-center',
+            theme.type == 1
+              ? 'bg-theme1-keypad'
+              : theme.type == 2
+              ? 'bg-theme2-keypad'
+              : 'bg-theme3-screen'
+          )}
+        >
           <div
-            className={`${btnClass} absolute rounded-full bg-theme1-keys-red top-1/2 left-0 -translate-y-1/2 cursor-pointer transition-transform`}
+            className={cn(
+              btnClass,
+              'absolute rounded-full bg-theme1-keys-red top-1/2 left-0 -translate-y-1/2 cursor-pointer transition-transform',
+              theme.type == 1
+                ? 'bg-theme1-keys-red'
+                : theme.type == 2
+                ? 'bg-theme2-keys-orange'
+                : 'bg-theme2-keys-cyan'
+            )}
             style={{
               transform: `translate(${theme.pointerPos}px,-50%) scale(0.6)`,
             }}
