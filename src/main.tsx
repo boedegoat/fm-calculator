@@ -4,10 +4,13 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 
+export const userInDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+
 createStore(
   {
     theme: {
-      type: 1,
+      type: userInDarkMode ? 1 : 2,
+      userTheme: false,
       pointerPos: 0,
     },
     calculator: {
@@ -18,6 +21,7 @@ createStore(
     },
   },
   {
+    name: 'state',
     storageType: localStorage,
   }
 )
