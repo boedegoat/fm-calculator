@@ -31,6 +31,7 @@ A challenge from [frontendmentor.io](https://www.frontendmentor.io/)
 - Mobile-first workflow
 - Tailwind CSS
 - React
+- little-state-machine - Super simple state management
 
 ### What I learned
 
