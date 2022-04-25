@@ -12,7 +12,11 @@ const App = () => {
     <main
       className={cn(
         'h-screen bg-theme1-main',
-        theme.type == 1 ? 'bg-theme1-main' : theme.type == 2 ? 'bg-theme2-main' : 'bg-theme3-main'
+        theme.type == 1
+          ? 'bg-theme1-main text-white'
+          : theme.type == 2
+          ? 'bg-theme2-main text-theme2-text'
+          : 'bg-theme3-main text-theme3-text-yellow'
       )}
     >
       <div className='p-5 py-8 flex flex-col h-full max-w-md mx-auto'>
