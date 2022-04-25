@@ -10,7 +10,7 @@ A challenge from [frontendmentor.io](https://www.frontendmentor.io/)
 
 ### Links
 
-- [Live Site](https://your-live-site-url.com)
+- [Live Site](https://nicecalculator.vercel.app/)
 - [Solution](https://www.frontendmentor.io/profile/boedegoat)
 
 ### The challenge
